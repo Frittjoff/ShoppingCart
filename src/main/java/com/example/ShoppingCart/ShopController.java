@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -12,7 +13,10 @@ public class ShopController {
 
 
     @Autowired
-    private ProductRepository repository;
+    ProductRepository repository;
+
+    @Autowired
+    AdminRepository admRepo;
 
     @GetMapping("/products")
     public String products(Model model) {
@@ -33,6 +37,23 @@ public class ShopController {
         repository.save(product);
         return "product";
     }
+    @GetMapping("/login")
+    public String loginAdmin() {
+        return "loginAdmin";
+    }
+
+    @PostMapping("/login")
+    public String loginAdminPost(@RequestParam String username, @RequestParam String password, HttpSession session) {
+        Admin isAdmin = admRepo.getAdmin(username, password);
+        if (isAdmin != null) {
+            session.setAttribute("admin", isAdmin);
+            return "products";
+        } else
+            return "redirect:/login";
+    }
+
+
+
 
     @GetMapping("/products/add")
     public String productUpdate(Model model) {
