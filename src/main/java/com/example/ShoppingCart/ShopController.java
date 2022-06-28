@@ -25,7 +25,7 @@ public class ShopController {
 
     @GetMapping("/product/{id}")
     public String product(Model model, @PathVariable Long id) {
-        Product product = repository.findById(id);
+        Product product = repository.findById(id).get();
         model.addAttribute("product", product);
         return "product";
     }
