@@ -32,6 +32,11 @@ public class ShopController {
         return "product";
     }
 
+    @PostMapping("/product")
+    public String addProduct(@ModelAttribute Product product) {
+        repository.save(product);
+        return "product";
+    }
     @GetMapping("/login")
     public String loginAdmin() {
         return "loginAdmin";
@@ -50,4 +55,10 @@ public class ShopController {
 
 
 
+    @GetMapping("/products/add")
+    public String productUpdate(Model model) {
+
+        model.addAttribute("product", new Product());
+        return "updateProduct";
+    }
 }
