@@ -12,6 +12,12 @@ table, th, td {
 <body>
 <h1>Products</h1>
 
+<div th:if="${session.admin != null}">
+    <button> <a href="/logout">Log out</a></button>
+</div>
+<div th:if="${session.admin == null}">
+    <button> <a href="/login">Log in</a></button>
+</div>
 
 <table style="width:100%">
     <tr>
@@ -19,7 +25,7 @@ table, th, td {
         <th> price</th>
     </tr>
     <tr>
-        <td colspan="10%"><a th:href="/product/ + ${product.id}" >Shoes</a></td>
+        <td colspan="10%"><a href="/product/2" >Shoes</a></td>
         <td> 200 SEK </td>
     </tr>
     <tr>

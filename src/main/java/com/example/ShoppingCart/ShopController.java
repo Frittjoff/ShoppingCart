@@ -19,7 +19,8 @@ public class ShopController {
     AdminRepository admRepo;
 
     @GetMapping("/products")
-    public String products(Model model) {
+    public String products(Model model, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
         List<Product> products = (List)repository.findAll();
         model.addAttribute("products", products);
         return "products";
@@ -39,7 +40,7 @@ public class ShopController {
     }
     @GetMapping("/login")
     public String loginAdmin() {
-        return "loginAdmin";
+        return "login";
     }
 
     @PostMapping("/login")
@@ -50,6 +51,12 @@ public class ShopController {
             return "products";
         } else
             return "redirect:/login";
+    }
+
+    @GetMapping("/logout")
+    public String logOutAdmin(HttpSession session) {
+        session.invalidate();
+        return "products";
     }
 
 
