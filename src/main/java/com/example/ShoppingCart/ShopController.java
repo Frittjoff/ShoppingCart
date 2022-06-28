@@ -28,10 +28,16 @@ public class ShopController {
         return "product";
     }
 
-    @PostMapping("/products")
-    public String addProduct(Model model, @RequestBody Product product) {
-        Product result = repository.save(product);
-        model.addAttribute("product", result);
+    @PostMapping("/product")
+    public String addProduct(@ModelAttribute Product product) {
+        repository.save(product);
         return "product";
+    }
+
+    @GetMapping("/products/add")
+    public String productUpdate(Model model) {
+
+        model.addAttribute("product", new Product());
+        return "updateProduct";
     }
 }
