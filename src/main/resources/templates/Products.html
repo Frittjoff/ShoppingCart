@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+<style>
+table, th, td {
+  border: 1px solid black;border-color: #96D4D4;
+}
+</style>
+</head>
+<body>
+<h1>Products</h1>
+
+
+<table style="width:100%">
+    <tr>
+        <th colspan="10%">Name</th>
+        <th> price</th>
+    </tr>
+    <tr>
+        <td colspan="10%"><a th:href="/product/ + ${product.id}" >Shoes</a></td>
+        <td> 200 SEK </td>
+    </tr>
+    <tr>
+        <td colspan="10%"><a href="Name" >Flowers</a></td>
+        <td> 300 SEK </td>
+    </tr>
+
+</table>
+</body>
+</html>
