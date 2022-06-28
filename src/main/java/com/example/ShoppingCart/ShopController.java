@@ -18,7 +18,7 @@ public class ShopController {
 
     @GetMapping("/products")
     public String products(Model model) {
-        List<Product> products = repository.findAll();
+        List<Product> products = (List)repository.findAll();
         model.addAttribute("products", products);
         return "products";
     }
