@@ -35,7 +35,7 @@ public class ShopController {
     @PostMapping("/product")
     public String addProduct(@ModelAttribute Product product) {
         repository.save(product);
-        return "product";
+        return "updateProduct";
     }
     @GetMapping("/login")
     public String loginAdmin() {
