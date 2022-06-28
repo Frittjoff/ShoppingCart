@@ -28,7 +28,9 @@ class ShoppingCartApplicationTests {
 	@Test
 	public void adminTest() {
 		Admin admin = admRepo.getAdmin("admin", "admin123");
+		Admin notAdmin = admRepo.getAdmin("admin", "123");
 		Assertions.assertEquals("admin", admin.getUsername());
+		Assertions.assertNull(notAdmin);
 	}
 
 }
