@@ -31,3 +31,12 @@ li a:hover:not(.active) {
 .active {
   background-color: pink;
 }
+
+.btn {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  padding: 14px 16px;
+  background-color: #34ebc0;
+  margin-top: 25px;
+}

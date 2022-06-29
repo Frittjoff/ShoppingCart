@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8"></meta>
     <title>Books</title>
+    <link rel="stylesheet" href="/home.css?version=1">
+
 </head>
 <body>
+
+<ul>
+    <li><a href="/admin">Home</a></li>
+    <li th:if="${session.admin != null}"><a href="/products/add">Add</a></li>
+    <li th:if="${session.admin != null}"><a href="/logout">Log out</a></li>
+    <li th:if="${session.admin == null}"><a href="/login">Log in</a></li>
+</ul>
+
 <h1>Book</h1>
 
 <form action="/product" th:object="${product}" method="POST">
@@ -15,6 +25,8 @@
     <input type="hidden" th:field="*{id}"/>
     <input type="submit" value="Save product">
 </form>
+
+<button onclick="history.go(-1)" class="btn">Tillbaka</button>
 
 </body>
 </html>

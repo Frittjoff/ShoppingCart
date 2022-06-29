@@ -9,18 +9,25 @@
 <body>
 
 <ul>
-  <li><a href="http://localhost:8080/products">Home</a></li>
-  <li><a href="http://localhost:8080/products/add">Add</a></li>
+  <li><a href="/admin">Home</a></li>
+  <li th:if="${session.admin != null}"><a href="/products/add">Add</a></li>
+  <li th:if="${session.admin != null}"><a href="/logout">Log out</a></li>
+  <li th:if="${session.admin == null}"><a href="/login">Log in</a></li>
 </ul>
 
 <table>
-
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Q</th>
+    </tr>
     <tr th:each="prod: ${products}">
         <td th:text="${prod.name}"/>
         <td th:text="${prod.price}"/>
         <td th:text="${prod.quantity}"/>
-        <td><a style="text-decoration: none;" th:href="@{/edit/{type}(type=${prod.id})}">Edit</a></td>
-        <td><a style="text-decoration: none;" th:href="@{/delete/{type}(type=${prod.id})}">Delete</a></td>
+        <td><a th:href="'/buy/' + ${prod.id}"> Buy</a></td>
+        <td th:if="${session.admin != null}"><a style="text-decoration: none;" th:href="@{/edit/{type}(type=${prod.id})}">Edit</a></td>
+        <td th:if="${session.admin != null}"><a style="text-decoration: none;" th:href="@{/delete/{type}(type=${prod.id})}">Delete</a></td>
     </tr>
 
 </table>
