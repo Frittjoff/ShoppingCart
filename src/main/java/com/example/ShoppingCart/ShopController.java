@@ -20,13 +20,22 @@ public class ShopController {
     @Autowired
     AdminRepository admRepo;
 
-    @GetMapping("/Produkter")
+    @GetMapping("/products")
     public String products(Model model, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        List<Product> products = productService.findAll();
+        model.addAttribute("products", products);
+        return "products";
+    }
+
+    @GetMapping("/Produkter")
+    public String product(Model model, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("admin");
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "Produkter";
     }
+
 
 
     @GetMapping("/product/{id}")
@@ -54,9 +63,10 @@ public class ShopController {
 
     @GetMapping("/admin")
     public String admin(Model model, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("admin");
+        List<Product> cart = (List<Product>)session.getAttribute("cart");
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
+        model.addAttribute("cart", cart);
         return "admin";
     }
 
@@ -109,7 +119,6 @@ public class ShopController {
 
         Integer sum;
         Product product = productService.findById(id);
-
         List<Product> cart = (List<Product>)session.getAttribute("cart");
         if(cart == null){
             cart = new ArrayList<>();
@@ -117,12 +126,18 @@ public class ShopController {
         }
         cart.add(product);
 
-        sum = (int)session.getAttribute("sum");
+        //todo summan av alla items
+
+        sum = (Integer)session.getAttribute("sum");
+        if (sum == null) {
+            sum = 0;
+        }
         sum += product.getPrice();
         session.setAttribute("sum", sum);
 
+        // todo quantity minskar
         product.setQuantity(product.getQuantity()-1);
-
+        productService.saveProduct(product);
         if(product.getQuantity() < 1) {
             productService.deleteProduct(product);
         }

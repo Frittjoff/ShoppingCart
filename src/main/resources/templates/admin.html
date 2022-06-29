@@ -25,11 +25,20 @@
         <td th:text="${prod.name}"/>
         <td th:text="${prod.price}"/>
         <td th:text="${prod.quantity}"/>
-        <td><a th:href="'/buy/' + ${prod.id}"> Buy</a></td>
+        <td><a th:href="'/addToCart/' + ${prod.id}"> Buy</a></td>
         <td th:if="${session.admin != null}"><a style="text-decoration: none;" th:href="@{/edit/{type}(type=${prod.id})}">Edit</a></td>
         <td th:if="${session.admin != null}"><a style="text-decoration: none;" th:href="@{/delete/{type}(type=${prod.id})}">Delete</a></td>
     </tr>
 
+</table>
+
+<table th:if="${session.sum != null}">
+    <tr th:each="item: ${cart}">
+        <td th:text="${item.name}"></td>
+    </tr>
+    <tr>
+        <td th:text="${session.sum}"> </td>
+    </tr>
 </table>
 
 </body>
