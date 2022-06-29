@@ -28,12 +28,31 @@ public class ShopController {
         return "products";
     }
 
+    @GetMapping("/Produkter")
+    public String product(Model model, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        List<Product> products = productService.findAll();
+        model.addAttribute("products", products);
+        return "Produkter";
+    }
+
+
 
     @GetMapping("/product/{id}")
     public String product(Model model, @PathVariable Long id) {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-        return "product";
+        return "ProductDetails";
+    }
+
+    /*
+    Dummy method...
+     */
+    @GetMapping("/cartProduct/{id}")
+    public String cartProduct(Model model, @PathVariable Long id) {
+        Product cartProducts = productService.findById(id);
+        model.addAttribute("cartProducts", cartProducts);
+        return "redirect:/Produkter";
     }
 
     @PostMapping("/product")
