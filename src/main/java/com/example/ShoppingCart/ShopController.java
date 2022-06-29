@@ -38,11 +38,12 @@ public class ShopController {
     @PostMapping("/product")
     public String addProduct(@ModelAttribute Product product) {
         repository.save(product);
-        return "updateProduct";
+        return "redirect:/admin";
     }
 
     @GetMapping("/admin")
-    public String admin(Model model) {
+    public String admin(Model model, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
         List<Product> products = (List)repository.findAll();
         model.addAttribute("products", products);
         return "admin";
@@ -58,7 +59,8 @@ public class ShopController {
         Admin isAdmin = admRepo.getAdmin(username, password);
         if (isAdmin != null) {
             session.setAttribute("admin", isAdmin);
-            return "admin";
+            return "redirect:/admin";
+            //return "products";        //todo vilken template kör vi?
         } else
             return "redirect:/login";
     }
@@ -66,7 +68,7 @@ public class ShopController {
     @GetMapping("/logout")
     public String logOutAdmin(HttpSession session) {
         session.invalidate();
-        return "products";
+        return "redirect:/admin";
     }
 
 
@@ -90,4 +92,5 @@ public class ShopController {
 
         return "redirect:/admin";
     }
+
 }
