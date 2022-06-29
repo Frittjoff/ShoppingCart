@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -43,9 +44,10 @@ public class ShopController {
 
     @GetMapping("/admin")
     public String admin(Model model, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("admin");
+        List<Product> cart = (List<Product>)session.getAttribute("cart");
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
+        model.addAttribute("cart", cart);
         return "admin";
     }
 
@@ -89,6 +91,37 @@ public class ShopController {
     public String delete(RestTemplate restTemplate, @PathVariable Long id) {
         Product product = productService.findById(id);
         productService.deleteProduct(product);
+
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/addToCart/{id}")
+    public String addToCart(HttpSession session, @PathVariable Long id) {
+
+        Integer sum;
+        Product product = productService.findById(id);
+        List<Product> cart = (List<Product>)session.getAttribute("cart");
+        if(cart == null){
+            cart = new ArrayList<>();
+            session.setAttribute("cart", cart);
+        }
+        cart.add(product);
+
+        //todo summan av alla items
+
+        sum = (Integer)session.getAttribute("sum");
+        if (sum == null) {
+            sum = 0;
+        }
+        sum += product.getPrice();
+        session.setAttribute("sum", sum);
+
+        // todo quantity minskar
+        product.setQuantity(product.getQuantity()-1);
+        productService.saveProduct(product);
+        if(product.getQuantity() < 1) {
+            productService.deleteProduct(product);
+        }
 
         return "redirect:/admin";
     }
