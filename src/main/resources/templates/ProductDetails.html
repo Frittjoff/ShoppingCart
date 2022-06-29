@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Product Details</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-inverse" style="background:#04B745;">
+    <div class="container-fluid">
+      <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Products</a> </div>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="container" style="width:600px;">
+
+      <div class="col-md-4" th:if="${product} != null">
+        <div class="thumbnail"> <img src="C:\Users\kasiddap\OneDrive - Capgemini\Desktop\images.png" alt="Lights">
+          <div class="caption">
+            <p style="text-align:center;" th:text="${product.description}">
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+              scrambled it to make a type specimen book.
+            </p>
+            <p style="text-align:center;color:#04B745;" th:text="${product.price}"></p>
+
+              <p style="text-align:center;color:#04B745;">
+                <a th:href="@{/cartProduct/{id}(id = ${product.id})}" class="btn btn-info">Add</a>
+
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
