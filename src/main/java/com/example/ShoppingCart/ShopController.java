@@ -22,7 +22,7 @@ public class ShopController {
     @GetMapping("/products")
     public String products(Model model, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("admin");
-        List<Product> products = (List<Product>) productService.findAll();
+        List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "products";
     }
@@ -43,7 +43,7 @@ public class ShopController {
 
     @GetMapping("/admin")
     public String admin(Model model) {
-        List<Product> products = (List)repository.findAll();
+        List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "admin";
     }
@@ -79,14 +79,14 @@ public class ShopController {
 
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id) {
-        model.addAttribute("product", repository.findById(id).get());
+        model.addAttribute("product", productService.findById(id));
         return "updateProduct";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(RestTemplate restTemplate, @PathVariable Long id) {
-        Product product = repository.findById(id).get();
-        repository.delete(product);
+        Product product = productService.findById(id);
+        productService.deleteProduct(product);
 
         return "redirect:/admin";
     }
