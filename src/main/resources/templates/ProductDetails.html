@@ -29,7 +29,7 @@
             <p style="text-align:center;color:#04B745;" th:text="${product.price}"></p>
 
               <p style="text-align:center;color:#04B745;">
-                <a th:href="@{/cartProduct/{id}(id = ${product.id})}" class="btn btn-info">Add</a>
+                <a th:href="@{/addToCart/{id}(id = ${product.id})}" class="btn btn-info">Add</a>
 
               </p>
             </form>

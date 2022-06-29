@@ -127,6 +127,6 @@ public class ShopController {
             productService.deleteProduct(product);
         }
 
-        return "redirect:/admin";
+        return "redirect:/Produkter";
     }
 }

@@ -28,20 +28,20 @@
     </tr>
     </thead>
 
-    <tr th:if="${cartProduct != null}">
-      <td><img src="C:\Users\kasiddap\OneDrive - Capgemini\Desktop\images.png" width="50"></td>
-      <td th:text="${cartProduct.name}"></td>
 
-
-
-      <td th:text="${cartProduct.price="></td>
+    </tr>
+    <tr th:if="${session.cart != null}" th:each="product : ${session.cart}">
+      <td><img src="images.png" width="50"></td>
+      <td th:text="${product.name}"></td>
+      <td th:text="${product.price}"></td>
+      <td ><input type="text"  th:text="${product.quantity}"></td>
  <!--     <td><input type="text" name="quantity"></td> -->
       <td><a href="zzz" class="btn btn-info">Delete</a></td>
-
-    <th:block th:with="varTotal = 0, controllerVar =${cardProduct.price}, var = ${varTotal * controllerVar}">
-      <p th:text="${var}"></p>
-    </th:block>
+     <th:block th:with="varTotal = 0, controllerVar =${product.price}, var = ${varTotal * controllerVar}">
+        <p th:text="${var}"></p>
+      </th:block>
     </tr>
+
     <tr><td colspan="5" align="right"><h4>Total: $total</h4></td></tr>
   </table>
 
@@ -58,7 +58,7 @@
           <div class="caption">
             <p style="text-align:center" th:text="${product.name}"></p>
             <p style="text-align:center;color:#04B745;"  th:text="${product.price}+SEK"></p>
-            <!--         <form method="get" th:action="@{/product/{id}(id = ${product.id})}">
+            <!--    <form method="get" th:action="@{/product/{id}(id = ${product.id})}">
 
          <p style="text-align:center;color:#04B745;">
                 <button type="submit" >Details</button>-->
