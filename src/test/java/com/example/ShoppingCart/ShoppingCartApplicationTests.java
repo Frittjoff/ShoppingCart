@@ -50,6 +50,15 @@ class ShoppingCartApplicationTests {
 	}
 
 	@Test
+	public void testAddProduct() {
+		Product product = new Product(11L, "tröja", 129, 3, "dmslkgnsl");
+		prodRepo.save(product);
+		List<Product> products2 = (List<Product>) prodRepo.findAll();
+		prodRepo.save(product);
+		Assertions.assertEquals(11, products2.size());
+	}
+
+	@Test
 	void testPostBook() throws Exception {
 
 		mvc.perform(MockMvcRequestBuilders.get("/products"))
@@ -67,5 +76,9 @@ class ShoppingCartApplicationTests {
 				.andExpect(MockMvcResultMatchers.content().string(containsString("namn")));
 
 	}
+
+
+
+
 
 }
