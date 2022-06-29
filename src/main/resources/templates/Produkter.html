@@ -31,7 +31,7 @@
 
     </tr>
     <tr th:if="${session.cart != null}" th:each="product : ${session.cart}">
-      <td><img src="images.png" width="50"></td>
+      <td><img src="/images.png" width="50"></td>
       <td th:text="${product.name}"></td>
       <td th:text="${product.price}"></td>
       <td ><input type="text"  th:text="${product.quantity}"></td>
@@ -54,7 +54,7 @@
     <div class="container" style="width:600px;">
 
       <div class="col-md-4"  th:each="product : ${products}">
-        <div class="thumbnail"> <img src="C:\Users\kasiddap\OneDrive - Capgemini\Desktop\images.png">
+        <div class="thumbnail"> <img src="/images.png">
           <div class="caption">
             <p style="text-align:center" th:text="${product.name}"></p>
             <p style="text-align:center;color:#04B745;"  th:text="${product.price}+SEK"></p>
