@@ -29,7 +29,7 @@
               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
               scrambled it to make a type specimen book.
             </p>
-            <p style="text-align:center;color:#04B745;" th:text="${product.price}"></p>
+            <p style="text-align:center;color:#04B745;" th:text="${product.price} + ' SEK'"></p>
 
               <p style="text-align:center;color:#04B745;">
                 <a th:href="@{/addToCart/{id}(id = ${product.id})}" class="btn btn-info">Add</a>

@@ -14,7 +14,6 @@
   <nav class="navbar navbar-inverse" style="background:#04B745;" th:if="${session.cart != null}">
     <div class="container-fluid pull-left" style="width:300px;" >
       <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Shopping Cart</a> </div>
-      <div th:if="${session.admin != null}" class="navbar-header"><a class="navbar-brand" href="/products/add" style="color:#FFFFFF;">Add</a></div>
     </div>
     <!--
     <div class="pull-right" style="margin-top:7px;margin-right:7px;" >
@@ -66,7 +65,8 @@
         <div class="thumbnail"> <img src="/images.png">
           <div class="caption">
             <p style="text-align:center" th:text="${product.name}"></p>
-            <p style="text-align:center;color:#04B745;"  th:text="${product.price}+SEK"></p>
+            <p style="text-align:center;color:#04B745;"  th:text="${product.price}+ ' SEK'"></p>
+
              <a th:if="${session.admin == null}" th:href="@{/product/{id}(id = ${product.id})}" class="btn btn-info">Details</a>
              <a th:if="${session.admin != null}" class="btn btn-info" th:href="@{/edit/{type}(type=${product.id})}">Edit</a>
              <a th:if="${session.admin != null}" class="btn btn-info" th:href="@{/delete/{type}(type=${product.id})}">Delete</a>
