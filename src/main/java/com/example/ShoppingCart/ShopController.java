@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ShopController {
@@ -30,7 +31,6 @@ public class ShopController {
 
     @GetMapping("/Produkter")
     public String product(Model model, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("admin");
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "Produkter";
@@ -50,7 +50,7 @@ public class ShopController {
     @PostMapping("/product")
     public String addProduct(@ModelAttribute Product product) {
         productService.saveProduct(product);
-        return "redirect:/admin";
+        return "redirect:/Produkter";
     }
 
     @GetMapping("/admin")
@@ -72,7 +72,7 @@ public class ShopController {
         Admin isAdmin = admRepo.getAdmin(username, password);
         if (isAdmin != null) {
             session.setAttribute("admin", isAdmin);
-            return "redirect:/admin";
+            return "redirect:/Produkter";
             //return "products";        //todo vilken template kör vi?
         } else
             return "redirect:/login";
@@ -81,7 +81,7 @@ public class ShopController {
     @GetMapping("/logout")
     public String logOutAdmin(HttpSession session) {
         session.invalidate();
-        return "redirect:/admin";
+        return "redirect:/Produkter";
     }
 
 
@@ -102,7 +102,7 @@ public class ShopController {
         Product product = productService.findById(id);
         productService.deleteProduct(product);
 
-        return "redirect:/admin";
+        return "redirect:/Produkter";
     }
 
     @GetMapping("/deleteItem/{id}")
@@ -118,7 +118,7 @@ public class ShopController {
                     session.setAttribute("cart", cart);
                 }
                 if(cart.size()==0){
-                    session.setAttribute("sum", cart.size());
+                  //  session.setAttribute("sum", cart.size());
                     session.removeAttribute("cart");
                 }else {
                     iSum = Integer.parseInt(session.getAttribute("sum").toString());
@@ -163,4 +163,5 @@ public class ShopController {
 
         return "redirect:/Produkter";
     }
+
 }

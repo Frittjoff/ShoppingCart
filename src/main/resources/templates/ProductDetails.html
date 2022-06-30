@@ -10,10 +10,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-
+<div class="container" style="width:600px;" >
   <nav class="navbar navbar-inverse" style="background:#04B745;">
     <div class="container-fluid">
-      <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Products</a> </div>
+      <div class="navbar-header"> <a class="navbar-brand" href="/Produkter" style="color:#FFFFFF;">Products</a> </div>
+      <div th:if="${session.admin != null}" class="navbar-header"><a class="navbar-brand" href="/products/add" style="color:#FFFFFF;">Add</a></div>
+      <div th:if="${session.admin != null}" class="navbar-header"><a class="navbar-brand" href="/logout" style="color:#FFFFFF;">Log out</a></div>
+      <div th:if="${session.admin == null}" class="navbar-header"><a class="navbar-brand" href="/login" style="color:#FFFFFF;">Log in</a></div>
     </div>
   </nav>
   <div class="row">
@@ -22,9 +25,10 @@
       <div class="col-md-4" th:if="${product} != null">
         <div class="thumbnail"> <img src="/images.png" alt="Lights">
           <div class="caption">
+            <p style="text-align:center;  font-weight: bold;" th:text="${product.name}">
             <p style="text-align:center;" th:text="${product.description}">
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book.
+        <!--      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type and scrambled it to make a type specimen book. -->
             </p>
             <p style="text-align:center;color:#04B745;" th:text="${product.price} + ' SEK'"></p>
 
