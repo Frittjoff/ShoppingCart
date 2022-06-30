@@ -1,33 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"></meta>
-    <title>Books</title>
-    <link rel="stylesheet" href="/home.css?version=1">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Product Details</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </style>
 </head>
 <body>
 
-<ul>
-    <li><a href="/admin">Home</a></li>
-    <li th:if="${session.admin != null}"><a href="/products/add">Add</a></li>
-    <li th:if="${session.admin != null}"><a href="/logout">Log out</a></li>
-    <li th:if="${session.admin == null}"><a href="/login">Log in</a></li>
-</ul>
+<nav class="navbar navbar-inverse" style="background:#04B745;">
+    <div class="container-fluid">
+        <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">
+            <ul>
+            <li><a href="/admin">Home</a></li>
+            <li th:if="${session.admin != null}"><a href="/products/add">Add</a></li>
+            <li th:if="${session.admin != null}"><a href="/logout">Log out</a></li>
+            <li th:if="${session.admin == null}"><a href="/login">Log in</a></li>
+        </ul></a> </div>
+    </div>
+</nav>
+<div class="row">
+    <div class="container" style="width:600px;">
+        <h1>Book</h1>
+        <div class="col-md-4" >
+        <form action="/product" th:object="${product}" method="POST">
+            Name: <input type="text" th:field="*{name}"/><br>
+            Quantity: <input type="text" th:field="*{quantity}"/><br>
+            Price: <input type="text" th:field="*{price}"/><br>
+            Description: <input type="text" th:field="*{description}"/><br>
+            <input type="hidden" th:field="*{id}"/>
+            <input type="submit" value="Save product">
+        </form>
 
-<h1>Book</h1>
+        <button onclick="history.go(-1)" class="btn">Tillbaka</button>
+        </div>
 
-<form action="/product" th:object="${product}" method="POST">
-    Name: <input type="text" th:field="*{name}"/>
-    Quantity: <input type="text" th:field="*{quantity}"/>
-    Price: <input type="text" th:field="*{price}"/>
-    Description: <input type="text" th:field="*{description}"/>
-    <input type="hidden" th:field="*{id}"/>
-    <input type="submit" value="Save product">
-</form>
-
-<button onclick="history.go(-1)" class="btn">Tillbaka</button>
-
+</div>
+</div>
 </body>
 </html>
 

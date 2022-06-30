@@ -5,9 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> Product Details</title>
-
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </style>
 </head>
 <body>
 
@@ -22,15 +22,14 @@
       <div class="col-md-4" th:if="${product} != null">
         <div class="thumbnail"> <img src="/images.png" alt="Lights">
           <div class="caption">
+            <p style="text-align:center;  font-weight: bold;" th:text="${product.name}">
             <p style="text-align:center;" th:text="${product.description}">
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book.
+        <!--      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type and scrambled it to make a type specimen book. -->
             </p>
-            <p style="text-align:center;color:#04B745;" th:text="${product.price}"></p>
-
+           <p style="text-align:center;color:#04B745;" th:text="${product.price}"></p>
               <p style="text-align:center;color:#04B745;">
                 <a th:href="@{/addToCart/{id}(id = ${product.id})}" class="btn btn-info">Add</a>
-
               </p>
             </form>
           </div>

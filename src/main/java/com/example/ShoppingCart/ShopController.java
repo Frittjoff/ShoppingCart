@@ -118,7 +118,7 @@ public class ShopController {
                     session.setAttribute("cart", cart);
                 }
                 if(cart.size()==0){
-                    session.setAttribute("sum", cart.size());
+                  //  session.setAttribute("sum", cart.size());
                     session.removeAttribute("cart");
                 }else {
                     iSum = Integer.parseInt(session.getAttribute("sum").toString());
