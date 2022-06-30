@@ -164,4 +164,9 @@ public class ShopController {
         return "redirect:/Produkter";
     }
 
+    @GetMapping("/complete")
+    public String complete() {
+        return "finishpage";
+    }
+
 }

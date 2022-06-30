@@ -35,7 +35,7 @@
     <tr th:if="${session.cart != null}" th:each="product : ${session.cart}">
       <td><img src="/images.png" width="50"></td>
       <td th:text="${product.name}"></td>
-      <td th:text="${product.price}"></td>
+      <td th:text="${product.price} + ' SEK'"></td>
       <td >1</td>
       <!--    <td th:text="${product.quantity}"></td>
       -->
@@ -46,7 +46,10 @@
 
 
     <tr >
-      <td colspan="5" align="right"><h4 th:text="'Total= '+${session.sum}"></h4></td>
+      <td colspan="5" align="right"><h4 th:text="'Total: '+${session.sum} + ' SEK'"></h4></td>
+    </tr>
+    <tr>
+      <td class="btn btn-info"><a style="color:#FFFFFF;" href="/complete">Checkout</a></td>
     </tr>
   </table>
 
@@ -63,7 +66,6 @@
 
       <div class="col-md-3"  th:each="product : ${products}">
         <div class="thumbnail"> <img src="/images.png">
-          <div class="caption">
             <p style="text-align:center;font-weight: bold;" th:text="${product.name}"></p>
             <p style="text-align:center;color:#04B745;"  th:text="${product.price}+ ' SEK'"></p>
 
@@ -74,7 +76,6 @@
 
               </p>
             </form>
-          </div>
         </div>
       </div>
     </div>
