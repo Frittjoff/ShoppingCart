@@ -27,9 +27,6 @@ class ShoppingCartApplicationTests {
 	AdminRepository admRepo;
 	@Autowired
 	MockMvc mvc;
-	@Autowired
-	ObjectMapper mapper;
-
 
 	@Test
 	void contextLoads() {
@@ -59,22 +56,15 @@ class ShoppingCartApplicationTests {
 	}
 
 	@Test
-	void testPostBook() throws Exception {
+	void testMainPageGet() throws Exception {
 
-		mvc.perform(MockMvcRequestBuilders.get("/products"))
+		mvc.perform(
+						MockMvcRequestBuilders.get("/Produkter")
+				)
 				.andExpect(status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.content().string(not(containsString("namn"))));
-
-		mvc.perform(MockMvcRequestBuilders.post("/product")
-						.content(mapper.writeValueAsString(new Product(11L, "namn", 45, 48, "Description")))
-						.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.content().string(containsString("namn")));
-
-		mvc.perform(MockMvcRequestBuilders.get("/products"))
-				.andExpect(status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.content().string(containsString("namn")));
-
+				.andExpect(MockMvcResultMatchers.content().string(containsString("Kia Sportage")))
+				.andExpect(MockMvcResultMatchers.content().string(containsString("Ford Puma")))
+				.andExpect(MockMvcResultMatchers.content().string(containsString("Volvo S90")));
 	}
 
 
