@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="home.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Shopping Cart</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container" style="width:600px;" >
+    <nav class="navbar navbar-inverse" style="background:#04B745;">
+        <div class="container-fluid">
+            <div class="navbar-header"> <a class="navbar-brand" href="/Produkter" style="color:#FFFFFF;">Products</a> </div>
+        </div>
+    </nav>
 
-<ul>
-    <li><a href="/admin">Home</a></li>
-
-</ul>
-
-    <h3>Admin login page: </h3>
-    <form method="POST" action="/login">
-      <input type="text" name="username"/><br/>
-      <input type="password" name="password"/><br/>
-      <input type="submit" />
+    <h3 class="center">Admin login page: </h3>
+    <form class="center" method="POST" action="/login">
+      <input class="margin" placeholder="Username" type="text" name="username"/><br/>
+      <input class="margin" placeholder="Password" type="password" name="password"/><br/>
+      <input class="btn btn-info" type="submit" />
+      <button class="btn btn"><a href="/Produkter">Tillbaka</a></button>
     </form>
 
-    <button onclick="history.go(-1)" class="btn">Tillbaka</button>
+
+</div>
+
+<style>
+    .center {
+        text-align: center;
+    }
+    .margin {
+        margin-bottom: 12px;
+    }
+</style>
 </body>
 </html>

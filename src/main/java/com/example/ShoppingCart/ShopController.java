@@ -31,7 +31,6 @@ public class ShopController {
 
     @GetMapping("/Produkter")
     public String product(Model model, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("admin");
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "Produkter";
@@ -51,7 +50,7 @@ public class ShopController {
     @PostMapping("/product")
     public String addProduct(@ModelAttribute Product product) {
         productService.saveProduct(product);
-        return "redirect:/admin";
+        return "redirect:/Produkter";
     }
 
     @GetMapping("/admin")
@@ -73,7 +72,7 @@ public class ShopController {
         Admin isAdmin = admRepo.getAdmin(username, password);
         if (isAdmin != null) {
             session.setAttribute("admin", isAdmin);
-            return "redirect:/admin";
+            return "redirect:/Produkter";
             //return "products";        //todo vilken template kör vi?
         } else
             return "redirect:/login";
@@ -82,7 +81,7 @@ public class ShopController {
     @GetMapping("/logout")
     public String logOutAdmin(HttpSession session) {
         session.invalidate();
-        return "redirect:/admin";
+        return "redirect:/Produkter";
     }
 
 
@@ -103,7 +102,7 @@ public class ShopController {
         Product product = productService.findById(id);
         productService.deleteProduct(product);
 
-        return "redirect:/admin";
+        return "redirect:/Produkter";
     }
 
     @GetMapping("/deleteItem/{id}")
@@ -165,27 +164,4 @@ public class ShopController {
         return "redirect:/Produkter";
     }
 
-    @GetMapping("/deleteItem/{id}")
-    public String deleteItem(HttpSession session, @PathVariable Long id) {
-        List<Product> cart = (List<Product>)session.getAttribute("cart");
-        Integer sum;
-        Product product = productService.findById(id);
-
-        cart.removeIf(item -> item.getId().equals(id));
-
-        //summan minskar om vi tar bort ett item
-
-        sum = (Integer)session.getAttribute("sum");
-        if (sum == null) {
-            sum = 0;
-        }
-        sum -= product.getPrice();
-        session.setAttribute("sum", sum);
-
-        //quantity ökar
-        product.setQuantity(product.getQuantity()+1);
-        productService.saveProduct(product);
-
-        return "redirect:/admin";
-    }
 }

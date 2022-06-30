@@ -14,6 +14,7 @@
   <nav class="navbar navbar-inverse" style="background:#04B745;" th:if="${session.cart != null}">
     <div class="container-fluid pull-left" style="width:300px;" >
       <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Shopping Cart</a> </div>
+      <div th:if="${session.admin != null}" class="navbar-header"><a class="navbar-brand" href="/products/add" style="color:#FFFFFF;">Add</a></div>
     </div>
     <!--
     <div class="pull-right" style="margin-top:7px;margin-right:7px;" >
@@ -53,6 +54,9 @@
   <nav class="navbar navbar-inverse" style="background:#04B745;">
     <div class="container-fluid">
       <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Products</a> </div>
+      <div th:if="${session.admin != null}" class="navbar-header"><a class="navbar-brand" href="/products/add" style="color:#FFFFFF;">Add</a></div>
+      <div th:if="${session.admin != null}" class="navbar-header"><a class="navbar-brand" href="/logout" style="color:#FFFFFF;">Log out</a></div>
+      <div th:if="${session.admin == null}" class="navbar-header"><a class="navbar-brand" href="/login" style="color:#FFFFFF;">Log in</a></div>
     </div>
   </nav>
   <div class="row">
@@ -63,7 +67,10 @@
           <div class="caption">
             <p style="text-align:center" th:text="${product.name}"></p>
             <p style="text-align:center;color:#04B745;"  th:text="${product.price}+SEK"></p>
-             <a th:href="@{/product/{id}(id = ${product.id})}" class="btn btn-info">Details</a>
+             <a th:if="${session.admin == null}" th:href="@{/product/{id}(id = ${product.id})}" class="btn btn-info">Details</a>
+             <a th:if="${session.admin != null}" class="btn btn-info" th:href="@{/edit/{type}(type=${product.id})}">Edit</a>
+             <a th:if="${session.admin != null}" class="btn btn-info" th:href="@{/delete/{type}(type=${product.id})}">Delete</a>
+
 
               </p>
             </form>
