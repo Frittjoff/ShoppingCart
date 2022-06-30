@@ -62,7 +62,7 @@
         <div class="thumbnail"> <img src="/images.png">
           <div class="caption">
             <p style="text-align:center" th:text="${product.name}"></p>
-            <p style="text-align:center;color:#04B745;"  th:text="${product.price}+SEK"></p>
+            <p style="text-align:center;color:#04B745;"  th:text="${product.price}+ ' SEK'"></p>
              <a th:href="@{/product/{id}(id = ${product.id})}" class="btn btn-info">Details</a>
 
               </p>
