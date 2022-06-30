@@ -35,6 +35,7 @@
 <table th:if="${session.sum != null}">
     <tr th:each="item: ${cart}">
         <td th:text="${item.name}"></td>
+        <td><a th:href="'/deleteItem/' + ${item.id}">delete</a></td>
     </tr>
     <tr>
         <td th:text="${session.sum}"> </td>
