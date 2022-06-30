@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ShopController {
@@ -141,6 +142,30 @@ public class ShopController {
         if(product.getQuantity() < 1) {
             productService.deleteProduct(product);
         }
+
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/deleteItem/{id}")
+    public String deleteItem(HttpSession session, @PathVariable Long id) {
+        List<Product> cart = (List<Product>)session.getAttribute("cart");
+        Integer sum;
+        Product product = productService.findById(id);
+
+        cart.removeIf(item -> item.getId().equals(id));
+
+        //summan minskar om vi tar bort ett item
+
+        sum = (Integer)session.getAttribute("sum");
+        if (sum == null) {
+            sum = 0;
+        }
+        sum -= product.getPrice();
+        session.setAttribute("sum", sum);
+
+        //quantity ökar
+        product.setQuantity(product.getQuantity()+1);
+        productService.saveProduct(product);
 
         return "redirect:/admin";
     }
