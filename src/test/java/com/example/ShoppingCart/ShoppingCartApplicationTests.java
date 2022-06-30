@@ -56,7 +56,7 @@ class ShoppingCartApplicationTests {
 	}
 
 	@Test
-	void testPostBook() throws Exception {
+	void testMainPageGet() throws Exception {
 
 		mvc.perform(
 						MockMvcRequestBuilders.get("/Produkter")
