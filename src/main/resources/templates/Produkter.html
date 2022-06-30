@@ -64,11 +64,11 @@
       <div class="col-md-3"  th:each="product : ${products}">
         <div class="thumbnail"> <img src="/images.png">
           <div class="caption">
-            <p style="text-align:center" th:text="${product.name}"></p>
+            <p style="text-align:center;font-weight: bold;" th:text="${product.name}"></p>
             <p style="text-align:center;color:#04B745;"  th:text="${product.price}+ ' SEK'"></p>
 
              <a th:if="${session.admin == null}" th:href="@{/product/{id}(id = ${product.id})}" class="btn btn-info">Details</a>
-             <a th:if="${session.admin != null}" class="btn btn-info" th:href="@{/edit/{type}(type=${product.id})}">Edit</a>
+             <div style="margin-bottom: 5px;"><a th:if="${session.admin != null}" class="btn btn-info" th:href="@{/edit/{type}(type=${product.id})}">Edit</a></div>
              <a th:if="${session.admin != null}" class="btn btn-info" th:href="@{/delete/{type}(type=${product.id})}">Delete</a>
 
 
