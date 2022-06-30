@@ -22,7 +22,7 @@ public class ShopController {
 
     @GetMapping("/products")
     public String products(Model model, HttpSession session) {
-        Admin admin = (Admin) session.getAttribute("admin");
+        Admin  admin = (Admin) session.getAttribute("admin");
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "products";
@@ -45,15 +45,7 @@ public class ShopController {
         return "ProductDetails";
     }
 
-    /*
-    Dummy method...
-     */
-    @GetMapping("/cartProduct/{id}")
-    public String cartProduct(Model model, @PathVariable Long id) {
-        Product cartProducts = productService.findById(id);
-        model.addAttribute("cartProducts", cartProducts);
-        return "redirect:/Produkter";
-    }
+
 
     @PostMapping("/product")
     public String addProduct(@ModelAttribute Product product) {
@@ -95,7 +87,6 @@ public class ShopController {
 
     @GetMapping("/products/add")
     public String productUpdate(Model model) {
-
         model.addAttribute("product", new Product());
         return "updateProduct";
     }
@@ -113,6 +104,34 @@ public class ShopController {
 
         return "redirect:/admin";
     }
+
+    @GetMapping("/deleteItem/{id}")
+    public String deleteCartItem( @PathVariable Long id, HttpSession session) {
+        List<Product> cart = (List<Product>)session.getAttribute("cart");
+        if(cart != null){
+
+            for (Product item:cart) {
+                int pPrice=0,iSum=0;
+                if(item.getId()==id) {
+                    pPrice = item.getPrice().intValue();
+                    cart.remove(item);
+                    session.setAttribute("cart", cart);
+                }
+                if(cart.size()==0){
+                    session.setAttribute("sum", cart.size());
+                    session.removeAttribute("cart");
+                }else {
+                    iSum = Integer.parseInt(session.getAttribute("sum").toString());
+                    session.setAttribute("sum", iSum-pPrice);
+                }
+                return "redirect:/Produkter";
+            }
+        }
+        return "redirect:/Produkter";
+    }
+
+
+
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(HttpSession session, @PathVariable Long id) {
