@@ -20,7 +20,7 @@
     <div class="container" style="width:600px;">
 
       <div class="col-md-4" th:if="${product} != null">
-        <div class="thumbnail"> <img src="C:\Users\kasiddap\OneDrive - Capgemini\Desktop\images.png" alt="Lights">
+        <div class="thumbnail"> <img src="/images.png" alt="Lights">
           <div class="caption">
             <p style="text-align:center;" th:text="${product.description}">
               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
@@ -29,7 +29,7 @@
             <p style="text-align:center;color:#04B745;" th:text="${product.price}"></p>
 
               <p style="text-align:center;color:#04B745;">
-                <a th:href="@{/cartProduct/{id}(id = ${product.id})}" class="btn btn-info">Add</a>
+                <a th:href="@{/addToCart/{id}(id = ${product.id})}" class="btn btn-info">Add</a>
 
               </p>
             </form>
